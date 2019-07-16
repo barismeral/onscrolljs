@@ -1,5 +1,6 @@
 'use strict';
 
+
 function onscroll() {
 
     this.components;
@@ -9,6 +10,7 @@ function onscroll() {
         window.addEventListener('load', this.initComponents);
     
         window.addEventListener('scroll', this.animate);
+        
 
     }
 
@@ -65,5 +67,30 @@ function onscroll() {
     }
 
 }
+
+/**
+ * 
+ * @param {document.element} elem 
+ * @param {function} func 
+ */
+function onViewport(elem,func){
+
+    let item = document.querySelector(elem);
+
+    window.addEventListener('scroll',()=>{
+
+        let point = item.getBoundingClientRect();
+
+        if(point.bottom < window.innerHeight){
+            func(item);
+        }
+
+    
+    });
+
+}
+
+
+    
 
 
