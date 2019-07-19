@@ -22,7 +22,8 @@ function onscroll() {
 
             item.style.opacity = "0";
 
-            let distance = (item.dataset.oscDistance == undefined)? "50px" : item.dataset.oscDistance;
+   
+            let distance = (item.dataset.oscDistance == null)? "50px" : item.dataset.oscDistance;
 
             item.setAttribute("data-osc-origin",item.getBoundingClientRect().bottom);
 
@@ -52,11 +53,12 @@ function onscroll() {
 
         this.components.forEach(item => {
 
-            let transition = (item.dataset.oscTransition == undefined ) ? "transform 2s" : item.dataset.oscTransition;
+            let transition = (item.dataset.oscTransition == undefined ) ? "1s" : item.dataset.oscTransition;
+            let delay = (item.dataset.oscDelay == undefined)? "0s":item.dataset.oscDelay;
 
             if (item.getBoundingClientRect().bottom < window.innerHeight) {
 
-                item.style.transition = "transform "+transition;
+                item.style.transition = "all "+transition +" linear "+delay;
                 item.style.opacity = "1";
                 item.style.transform = "translate(0,0)";
             }
@@ -68,11 +70,6 @@ function onscroll() {
 
 }
 
-/**
- * 
- * @param {document.element} elem 
- * @param {function} func 
- */
 function onViewport(elem,func){
 
     let item = document.querySelector(elem);
